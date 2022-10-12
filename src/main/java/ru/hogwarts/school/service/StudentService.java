@@ -2,20 +2,18 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private Map<Long, Student> students = new HashMap<>();
-    private long id = 0L;
+    private final HashMap<Long, Student> students = new HashMap<>();
+    private long id = 0;
 
     public Student createStudent(Student student){
-        id++;
-        students.put(id, student);
+        student.setId(id++);
+        students.put(student.getId(), student);
         return student;
     }
 
@@ -24,6 +22,9 @@ public class StudentService {
     }
 
     public Student updateStudent(long id, Student student) {
+        if (!students.containsKey(id)) {
+            return null;
+        }
         students.put(id, student);
         return student;
     }

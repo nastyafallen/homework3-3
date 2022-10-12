@@ -1,6 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.hogwarts.school.model.Student;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +12,7 @@ class StudentServiceTest {
     void createStudent() {
         Student student1 = new Student(0L, "test", 99);
         out.createStudent(student1);
-        assertEquals(out.getStudent(1), student1);
+        assertEquals(out.getStudent(0), student1);
     }
 
     @Test
@@ -24,7 +23,7 @@ class StudentServiceTest {
         out.createStudent(student1);
         out.createStudent(student2);
         out.createStudent(student3);
-        assertEquals(out.getStudent(2), student2);
+        assertEquals(out.getStudent(1), student2);
     }
 
     @Test
@@ -38,10 +37,10 @@ class StudentServiceTest {
     void updateStudent() {
         Student student1 = new Student(0L, "test1", 1);
         out.createStudent(student1);
-        assertThat(out.getStudent(1)).isEqualTo(student1);
+        assertThat(out.getStudent(0)).isEqualTo(student1);
         Student student2 = new Student(4L, "test2", 34);
-        out.updateStudent(1, student2);
-        assertThat(out.getStudent(1)).isEqualTo(student2);
+        out.updateStudent(0, student2);
+        assertThat(out.getStudent(0)).isEqualTo(student2);
     }
 
     @Test
@@ -52,8 +51,8 @@ class StudentServiceTest {
         out.createStudent(student1);
         out.createStudent(student2);
         out.createStudent(student3);
-        out.deleteStudent(1);
-        assertThat(out.getStudent(1)).isNull();
+        out.deleteStudent(0);
+        assertThat(out.getStudent(0)).isNull();
     }
 
     @Test

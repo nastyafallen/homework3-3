@@ -7,7 +7,7 @@ import ru.hogwarts.school.service.StudentService;
 
 import java.util.List;
 
-@RequestMapping("student")
+@RequestMapping("/student")
 @RestController
 public class StudentController {
     private final StudentService studentService;
@@ -17,13 +17,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity createStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
         Student newStudent = studentService.createStudent(student);
         return ResponseEntity.ok(newStudent);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity getStudent(@PathVariable Long id) {
+    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
@@ -32,19 +32,19 @@ public class StudentController {
     }
 
     @PutMapping
-    public ResponseEntity updateStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
         Student updatedStudent = studentService.updateStudent(student.getId(), student);
         return  ResponseEntity.ok(updatedStudent);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteStudent(@PathVariable Long id) {
-        Student deletedStudent = studentService.deleteStudent(id);
-        return ResponseEntity.ok(deletedStudent);
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("{age}")
-    public ResponseEntity getStudentsByAge(@PathVariable int age) {
+    public ResponseEntity<List<Student>> getStudentsByAge(@PathVariable int age) {
         List<Student> students = studentService.getStudentsByAge(age);
         return ResponseEntity.ok(students);
     }
