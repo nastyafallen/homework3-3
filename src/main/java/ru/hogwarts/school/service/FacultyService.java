@@ -34,9 +34,10 @@ public class FacultyService {
     }
 
     public List<Faculty> getFacultiesByColor(String color) {
-        return faculties.values().stream()
+        List<Faculty> result = faculties.values().stream()
                 .filter(i -> i.getColor().equals(color))
                 .collect(Collectors.toList());
+        return result;
     }
 
 }

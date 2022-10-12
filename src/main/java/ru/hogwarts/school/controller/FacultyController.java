@@ -49,8 +49,10 @@ public class FacultyController {
 
     @GetMapping("{color}")
     public ResponseEntity<List<Faculty>> getFacultiesByColor(@PathVariable String color) {
-        List<Faculty> faculties = facultyService.getFacultiesByColor(color);
-        return ResponseEntity.ok(faculties);
+        if (color != null){
+            return ResponseEntity.ok(facultyService.getFacultiesByColor(color));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
 

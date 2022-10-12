@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
@@ -45,8 +46,10 @@ public class StudentController {
 
     @GetMapping("{age}")
     public ResponseEntity<List<Student>> getStudentsByAge(@PathVariable int age) {
-        List<Student> students = studentService.getStudentsByAge(age);
-        return ResponseEntity.ok(students);
+        if (age > 0) {
+            return ResponseEntity.ok(studentService.getStudentsByAge(age));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }
