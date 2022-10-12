@@ -29,8 +29,8 @@ public class StudentService {
         return student;
     }
 
-    public Student deleteStudent(long id) {
-        return students.remove(id);
+    public void deleteStudent(long id) {
+        students.remove(id);
     }
 
     public List<Student> getStudentsByAge(int age) {
