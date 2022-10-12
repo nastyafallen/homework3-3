@@ -12,7 +12,7 @@ public class StudentService {
     private long id = 0;
 
     public Student createStudent(Student student){
-        student.setId(id++);
+        student.setId(++id);
         students.put(student.getId(), student);
         return student;
     }

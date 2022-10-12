@@ -12,7 +12,7 @@ public class FacultyService {
     private long id = 0;
 
     public Faculty createFaculty(Faculty faculty){
-        faculty.setId(id++);
+        faculty.setId(++id);
         faculties.put(faculty.getId(), faculty);
         return faculty;
     }
