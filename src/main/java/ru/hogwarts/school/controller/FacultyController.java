@@ -3,6 +3,7 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.Entity;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
@@ -47,12 +48,9 @@ public class FacultyController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{color}")
-    public ResponseEntity<List<Faculty>> getFacultiesByColor(@PathVariable String color) {
-        if (color != null){
-            return ResponseEntity.ok(facultyService.getFacultiesByColor(color));
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @GetMapping
+    public List<Faculty> getFacultiesByColor(@RequestParam("color") String color) {
+        return facultyService.getFacultiesByColor(color);
     }
 }
 

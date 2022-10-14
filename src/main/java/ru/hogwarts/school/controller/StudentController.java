@@ -44,12 +44,12 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{age}")
-    public ResponseEntity<List<Student>> getStudentsByAge(@PathVariable int age) {
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.getStudentsByAge(age));
+    @GetMapping
+    public List<Student> getStudentsByAge(@RequestParam("age") int age) {
+        if (age < 0) {
+            System.out.println("Возраст не может быть меньше 0!");;
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return studentService.getStudentsByAge(age);
     }
 
 }
