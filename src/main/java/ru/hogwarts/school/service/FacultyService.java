@@ -24,10 +24,16 @@ public class FacultyService {
         return facultyRepository.findById(id);
     }
 
-    public Optional<Faculty> updateFaculty(long id, Faculty faculty) {
-
-        Optional<Faculty> newFaculty = new Faculty(facultyRepository.findById(id));
-        return facultyRepository.save(newFaculty);
+    public Faculty updateFaculty(long id, Faculty faculty) {
+        Optional<Faculty> optional = facultyRepository.findById(id);
+        if (optional.isPresent()) {
+            Faculty facultyFromDb = optional.get();
+            facultyFromDb.setColor(faculty.getColor());
+            facultyFromDb.setName(faculty.getName());
+            return facultyRepository.save(facultyFromDb);
+        } else {
+            return null;
+        }
     }
 
     public void deleteFaculty(long id) {

@@ -24,10 +24,16 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
-    public void updateStudent(long id, Student student) {
-        Optional<Student> optional = Optional.of(studentRepository.findById(id));
-        optional.ifPresent(o -> {o.equals(student), studentRepository.save(o)});
-        studentRepository.
+    public Student updateStudent(long id, Student student) {
+        Optional<Student> optional = studentRepository.findById(id);
+        if (optional.isPresent()) {
+            Student studentFromDb = optional.get();
+            studentFromDb.setAge(student.getAge());
+            studentFromDb.setName(student.getName());
+            return studentRepository.save(studentFromDb);
+        } else {
+            return null;
+        }
     }
 
     public void deleteStudent(long id) {
